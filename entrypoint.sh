@@ -67,7 +67,7 @@ wait_for_port "Redis" "$REDIS_HOST" "$REDIS_PORT"
 
 case "$1" in
   webserver)
-    airflow initdb
+    { airflow upgradedb } || { airflow initdb }
     exec airflow webserver
     ;;
   worker|scheduler)
